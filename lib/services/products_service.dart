@@ -9,13 +9,14 @@ class ProductsService {
   Future<List<Products>> getProducts() async {
     final response = await http.get(Uri.parse(_baseUrl));
     if (response.statusCode == 200) {
-      List<Products> productsList = [];
+      // List<Products> productsList = [];
       final List<dynamic> data = jsonDecode(response.body);
-      for (Map<String, dynamic> i in data) {
-        productsList.add(Products.fromJson(i));
+      return data.map((product)=>Products.fromJson(product)).toList();
+      // for (Map<String, dynamic> i in data) {
+      //   productsList.add(Products.fromJson(i));
       }
-      return productsList;
-    } else {
+      // return productsList;
+   else {
       throw Exception("Failed to load products");
     }
   }
